@@ -1,2 +1,4 @@
-.gitignore
-amine
+credentials.txt
+db_password.tx
+db_root_password.txt
+docker/srcs/.env

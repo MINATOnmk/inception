@@ -2,11 +2,13 @@ FROM debian:bullseye
 
 RUN apt-get update && apt-get -y install mariadb-server
 
-# RUN mkdir -p /run/mysqld && chwon mysqld:mysqld /run/mysqld 
+RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld
 
-RUN  sed "i/127.0.0.1/0.0.0.0/g" 
+RUN sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf
 
-COPY requirements/mariadb/tools/setup.sh /setup.sh
 
 EXPOSE 3306
+COPY requirements/mariadb/tools/setup.sh /setup.sh
+RUN chmod +x /setup.sh
 
+ENTRYPOINT ["/setup.sh"]

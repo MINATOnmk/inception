@@ -1,5 +1,7 @@
 #!/bin/bash
 
+MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password.txt)
+MYSQL_PASSWORD=$(cat /run/secrets/db_password.txt)
 
 if [ ! -d "/var/lib/mysql/mysql" ]; then
 mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null 2>&1
@@ -27,3 +29,5 @@ mysqladmin -u root -p"${MYSQL_ROOT_PASSWORD}" shutdown
 wait $MYSQL_PID
 
 exec mysqld_safe
+
+# MYSQL_ROOT_PASSWORD  and MYSQL_PASSWORD

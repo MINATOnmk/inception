@@ -1,0 +1,63 @@
+
+services:
+  mariadb:
+    image: mariadb_image
+    build: ./requirements/mariadb
+    container_name : mariadb
+
+    secrets:
+      - db_password
+      - db_root_password
+    restart: always
+    networks:
+      - inception_network
+    env_file:
+      - .env
+    
+    volumes:
+      - "/mnt/homes/mboulagh/inception_volumes/mariadb:/var/lib/mysql"
+
+  nginx:
+    image: nginx_image
+    build: ./requirements/nginx
+    container_name : nginx
+    restart: always
+    ports:
+      - "443:443"
+    networks:
+      - inception_network
+    volumes:
+      - "/mnt/homes/mboulagh/inception_volumes/wordpress:/var/www/html"
+    env_file:
+      - .env
+  wordpress:
+    depends_on : mariadb 
+    image: wordpress_image
+    build: ./requirements/wordpress
+    container_name : wordpress
+    secrets:
+      - db_password
+      - wp_password
+      - wp_root_password
+    restart: always
+    networks:
+      - inception_network
+    env_file:
+      - .env
+    volumes:
+      - "/mnt/homes/mboulagh/inception_volumes/wordpress:/var/www/html"
+
+secrets:
+  db_password :
+    file : ../secrets/db_password.txt
+  db_root_password :
+    file : ../secrets/db_root_password.txt
+  wp_password :
+    file : ../secrets/wp_password.txt
+  wp_root_password :
+    file : ../secrets/wp_root_password.txt
+   
+
+networks:
+  inception_network:
+    driver: bridge

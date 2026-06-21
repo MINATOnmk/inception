@@ -1,33 +1,34 @@
 #!/bin/bash
 
-MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password.txt)
-MYSQL_PASSWORD=$(cat /run/secrets/db_password.txt)
+set -e
 
-if [ ! -d "/var/lib/mysql/mysql" ]; then
-mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null 2>&1
+echo "1"
+echo "Variables are: DB=$MYSQL_DATABASE, USER=$MYSQL_USER, PASS=$MYSQL_USER_PASSWORD"
+
+if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
+    echo "=> Installing DB for the first time..."
+    mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null 
+
+    echo "2"
+    mysqld_safe --skip-networking &
+    MYSQL_PID=$!
+    
+    sleep 10
+
+    echo "3"
+    mysql -e "CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;"
+
+    mysql -e "CREATE USER IF NOT EXISTS \`${MYSQL_USER}\`@'%' IDENTIFIED BY '${MYSQL_USER_PASSWORD}';"
+
+    mysql -e "GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO \`${MYSQL_USER}\`@'%';"
+
+    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
+
+    mysql -u root -p"${MYSQL_ROOT_PASSWORD}" -e "FLUSH PRIVILEGES;"
+    echo "4"
+    mysqladmin -u root -p"${MYSQL_ROOT_PASSWORD}" shutdown
+    echo "4.5"
+    wait $MYSQL_PID
 fi
-
-mysqld_safe --skip-networking &
-MYSQL_PID=$!
-
-while ! nc -z localhost 3306; do   
-  sleep 1
-done
-
-mysql -u root -e "CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;"
-
-mysql -u root -e "CREATE USER IF NOT EXISTS \`${MYSQL_USER}\`@'%'IDENTIFIED BY '${MYSQL_PASSWORD}';"
-
-mysql -u root -e "GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO \`${MYSQL_USER}\`@'%';"
-
-mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
-
-mysql -u root -e "FLUSH PRIVILEGES;"
-
-mysqladmin -u root -p"${MYSQL_ROOT_PASSWORD}" shutdown
-
-wait $MYSQL_PID
-
+    echo "5"
 exec mysqld_safe
-
-# MYSQL_ROOT_PASSWORD  and MYSQL_PASSWORD

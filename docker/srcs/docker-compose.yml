@@ -4,18 +4,13 @@ services:
     image: mariadb_image
     build: ./requirements/mariadb
     container_name : mariadb
-
-    secrets:
-      - db_password
-      - db_root_password
     restart: always
     networks:
       - inception_network
     env_file:
       - .env
-    
     volumes:
-      - "/mnt/homes/mboulagh/inception_volumes/mariadb:/var/lib/mysql"
+      - "mariadb_data:/var/lib/mysql"
 
   nginx:
     image: nginx_image
@@ -24,39 +19,44 @@ services:
     restart: always
     ports:
       - "443:443"
+    depends_on:
+      - wordpress
     networks:
       - inception_network
     volumes:
-      - "/mnt/homes/mboulagh/inception_volumes/wordpress:/var/www/html"
+      - "wordpress_data:/var/www/html"
     env_file:
       - .env
+
+
   wordpress:
-    depends_on : mariadb 
+    depends_on : 
+      - mariadb 
     image: wordpress_image
     build: ./requirements/wordpress
     container_name : wordpress
-    secrets:
-      - db_password
-      - wp_password
-      - wp_root_password
     restart: always
     networks:
       - inception_network
     env_file:
       - .env
     volumes:
-      - "/mnt/homes/mboulagh/inception_volumes/wordpress:/var/www/html"
+      - "wordpress_data:/var/www/html"
 
-secrets:
-  db_password :
-    file : ../secrets/db_password.txt
-  db_root_password :
-    file : ../secrets/db_root_password.txt
-  wp_password :
-    file : ../secrets/wp_password.txt
-  wp_root_password :
-    file : ../secrets/wp_root_password.txt
-   
+volumes:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/mboulagh/inception_volumes/mariadb_data
+
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/mboulagh/inception_volumes/wordpress_data
 
 networks:
   inception_network:

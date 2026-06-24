@@ -12,6 +12,16 @@ services:
     volumes:
       - "mariadb_data:/var/lib/mysql"
 
+  adminer:
+    image: adminer
+    build: ./requirements/bonus/adminer/
+    container_name : adminer
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - inception_network
+
   nginx:
     image: nginx
     build: ./requirements/nginx

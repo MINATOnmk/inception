@@ -1,6 +1,6 @@
 NAME = inception
 COMPOSE_FILE = srcs/docker-compose.yml
-VOLUMES_PATH = /home/mboulagh/inception_volumes
+VOLUMES_PATH = /home/mboulagh/data
 
 all : up
 

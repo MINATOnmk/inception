@@ -1,7 +1,7 @@
 
 services:
   mariadb:
-    image: mariadb_image
+    image: mariadb
     build: ./requirements/mariadb
     container_name : mariadb
     restart: always
@@ -13,7 +13,7 @@ services:
       - "mariadb_data:/var/lib/mysql"
 
   nginx:
-    image: nginx_image
+    image: nginx
     build: ./requirements/nginx
     container_name : nginx
     restart: always
@@ -32,7 +32,7 @@ services:
   wordpress:
     depends_on : 
       - mariadb 
-    image: wordpress_image
+    image: wordpress
     build: ./requirements/wordpress
     container_name : wordpress
     restart: always
@@ -49,14 +49,14 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/mboulagh/inception_volumes/mariadb_data
+      device: /home/mboulagh/data/mariadb_data
 
   wordpress_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/mboulagh/inception_volumes/wordpress_data
+      device: /home/mboulagh/data/wordpress_data
 
 networks:
   inception_network:

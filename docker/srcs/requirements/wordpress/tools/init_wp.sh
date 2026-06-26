@@ -49,4 +49,4 @@ fi
 
 echo "=> Starting PHP-FPM daemon..."
 
-exec php-fpm7.4 -F #force-foreground
+exec php-fpm8.2 -F #force-foreground

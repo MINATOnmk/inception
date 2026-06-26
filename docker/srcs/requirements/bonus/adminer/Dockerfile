@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:12
 
 RUN apt-get update && apt install -y curl php php-mysql
 WORKDIR /var/www/html

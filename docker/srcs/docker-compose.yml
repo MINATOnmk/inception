@@ -22,6 +22,20 @@ services:
     networks:
       - inception_network
 
+  cadvisor:
+    image: cadvisor
+    build: ./requirements/bonus/cadvisor
+    container_name : cadvisor
+    restart: always
+    ports:
+      - "8082:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro #for /sys/fs/cgroup
+      - /var/lib/docker:/var/lib/docker:ro
+    networks:
+      - inception_network
 
   adminer:
     image: adminer

@@ -1,14 +1,14 @@
-FROM debian:bullseye
+FROM debian:12
 
 RUN apt-get update && apt-get install -y \
-    php7.4 \
-    php7.4-fpm \
-    php7.4-mysql \
+    php8.2 \
+    php8.2-fpm \
+    php8.2-mysql \
     curl \
     mariadb-client
 
 
-COPY conf/www.conf   /etc/php/7.4/fpm/pool.d/www.conf
+COPY conf/www.conf   /etc/php/8.2/fpm/pool.d/www.conf
 
 RUN mkdir -p /run/php \
     && chown -R www-data:www-data /run/php

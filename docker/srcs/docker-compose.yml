@@ -17,6 +17,8 @@ services:
     build: ./requirements/bonus/static_website
     container_name : static_website
     restart: always
+    ports:
+      - "8081:80"
     networks:
       - inception_network
 

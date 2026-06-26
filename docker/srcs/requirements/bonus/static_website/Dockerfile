@@ -2,4 +2,6 @@ FROM debian:bullseye
 
 RUN apt-get update && apt-get install nginx -y
 
-CMD ["nginx" , "-g" ,"deamon off;"]
+COPY tools/index.html /var/www/html/index.html
+
+CMD ["nginx" , "-g" ,"daemon off;"]

@@ -22,6 +22,14 @@ services:
     networks:
       - inception_network
 
+  redis:
+    image: redis
+    build: ./requirements/bonus/redis
+    container_name : redis
+    restart: always
+    networks:
+      - inception_network
+
   cadvisor:
     image: cadvisor
     build: ./requirements/bonus/cadvisor

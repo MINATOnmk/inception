@@ -47,6 +47,9 @@ else
     echo "the files of wordpress already exist"
 fi
 
+wp plugin install redis-cache --activate --allow-root
+wp redis enable --allow-root
+
 echo "=> Starting PHP-FPM daemon..."
 
 exec php-fpm8.2 -F #force-foreground

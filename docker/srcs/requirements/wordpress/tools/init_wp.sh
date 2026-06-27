@@ -40,15 +40,21 @@ if [ ! -f wp-config.php ]; then
     echo "5"
 
     wp user create $WP_USER $WP_USER_EMAIL --role=author --user_pass=$WP_USER_PASSWORD --allow-root 
-    chown -R www-data:www-data /var/www/html
     echo "6"
+    chown -R www-data:www-data /var/www/html
     
+    echo "7"
+wp plugin install redis-cache --activate --allow-root
+    echo "8"
+wp config set WP_REDIS_HOST redis --allow-root
+    echo "9"
+wp redis enable --allow-root
+    echo "10"
+
 else 
     echo "the files of wordpress already exist"
 fi
 
-wp plugin install redis-cache --activate --allow-root
-wp redis enable --allow-root
 
 echo "=> Starting PHP-FPM daemon..."
 

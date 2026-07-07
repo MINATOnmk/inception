@@ -11,7 +11,7 @@ if [ ! -f wp-config.php ]; then
 
     echo "1"
 
-    while ! mysqladmin ping -h"mariadb" --silent; do
+    while ! mysqladmin ping -h"mariadb" -u"$MYSQL_USER" -p"$MYSQL_USER_PASSWORD" --silent; do
         echo "MariaDB not ready yet, waiting..."
         sleep 2
     done

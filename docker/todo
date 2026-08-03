@@ -9,7 +9,7 @@
     # config default file /etc/mysql/mariadb.conf.d/50-server.cnf
 
   -->nginx
-   *******the port if we add : in last and default port and i use the 444 with https for exempel
+   *******the port if we add : in last and default port and i use the 443 with https for exempel
    **config file**
     # server bloc and other block http and more
     # ssl
@@ -98,3 +98,6 @@
 
 all of chown have to be study
 the cashe of docker and makefile without deep clean
+
+
+git ignore

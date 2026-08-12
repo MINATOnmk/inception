@@ -1,11 +1,9 @@
 FROM debian:12
 
 RUN apt-get update && apt-get install -y \
-    php8.2 \
     php8.2-fpm \
     php8.2-mysql \
-    curl \
-    mariadb-client
+    curl
 
 RUN sed -i 's|listen = /run/php/php8.2-fpm.sock|listen = 9000|g' /etc/php/8.2/fpm/pool.d/www.conf && \
     sed -i 's|;clear_env = no|clear_env = no|g' /etc/php/8.2/fpm/pool.d/www.conf

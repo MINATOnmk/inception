@@ -27,18 +27,15 @@ if [ ! -f wp-config.php ]; then
 
     chown -R www-data:www-data /var/www/html
     
-    wp plugin install redis-cache --activate --allow-root
+    wp plugin install redis-cache --activate --allow-root # bonus
 
-    wp config set WP_REDIS_HOST redis --allow-root
+    wp config set WP_REDIS_HOST redis --allow-root # bonus
 
-    wp redis enable --allow-root
+    wp redis enable --allow-root # bonus 
 
-
-else 
-    echo "the files of wordpress already exist"
 fi
 
 
-echo "=> startingg PHP-FPM daemon..."
+echo "=> startingg php-fpm daemon"
 
 exec php-fpm8.2 -F 

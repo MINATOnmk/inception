@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 cd /var/www/html
 
 if [ ! -f wp-config.php ]; then

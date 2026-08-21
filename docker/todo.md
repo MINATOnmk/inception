@@ -29,7 +29,7 @@
 
 ## 4. 🐙 DOCKER COMPOSE (Orchestration)
 - [ ] Define what Docker Compose is and how it interacts with the Docker Engine API.
-- [ ] Explain `restart: always` or `on-failure` policies.
+- [ ] Explain `restart: on-failure` or `on-failure` policies.
 - [ ] Understand how `.env` files inject variables securely into the compose configuration without hardcoding secrets.
 - [ ] ⚠️ **[MISSING]** Explain what `build: .` does behind the scenes (triggers the Dockerfile build before orchestration).
 

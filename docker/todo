@@ -1,31 +1,15 @@
 --> mandatory
   -->mariadb
     # sql cmd and script cmd
-    # mysqld cmd and not mysql
-    # EOF way
-    # sed -i 's/127.0.0.1/0.0.0.0/g'
-
   -->nginx
-   *******the port if we add : in last and default port and i use the 443 with https for exempel
-   **config file**
-    # ssl
     # ssl handchake
     # location ~ \.php$ 
-   **script**
 
   -->wordpress
-   **docekrfile**
-   **conf file**
-     # user of wordpress
-   **script**
-    # all of wp cmd 
     # redis cashe and how it work with wp
 
   -->docker compose
     # what is docker compose
-    # the depend block
-    # port maping
-    # restart
 
   -->makefile and docker cmd
     # docker compose -f $(COMPOSE_FILE) up --build -d
@@ -37,13 +21,7 @@
 
   -->network
     # bridge and the other thing
-    # namespaces net
-    # the other drivers host 
-    # the default network
-
   -->volume
-
-
 
 ---------------------------
 
@@ -70,11 +48,8 @@
  # and is this redis work with all webstite or just word press
 
 
-all of chown have to be study
-the cashe of docker and makefile without deep clean
 
 
-git ignore
 
 pool in wordpress
 
@@ -82,4 +57,3 @@ prune cmd
 Read about how daemons work and whether it’s a good idea to use them or not. 
 
 
-fix port in bonuis

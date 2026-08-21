@@ -4,7 +4,7 @@ services:
     image: mariadb
     build: ./requirements/mariadb
     container_name : mariadb
-    restart: always
+    restart: on-failure
     networks:
       - inception_network
     env_file:
@@ -16,7 +16,7 @@ services:
     image: static_website
     build: ./requirements/bonus/static_website
     container_name : static_website
-    restart: always
+    restart: on-failure
     ports:
       - "8081:80"
     networks:
@@ -26,7 +26,7 @@ services:
     image: redis
     build: ./requirements/bonus/redis
     container_name : redis
-    restart: always
+    restart: on-failure
     networks:
       - inception_network
 
@@ -34,7 +34,7 @@ services:
     image: cadvisor
     build: ./requirements/bonus/cadvisor
     container_name : cadvisor
-    restart: always
+    restart: on-failure
     ports:
       - "8082:8080"
     volumes:
@@ -51,7 +51,7 @@ services:
     container_name : adminer
     ports:
       - "8080:8080"
-    restart: always
+    restart: on-failure
     networks:
       - inception_network
 
@@ -59,7 +59,7 @@ services:
     image: nginx
     build: ./requirements/nginx
     container_name : nginx
-    restart: always
+    restart: on-failure
     ports:
       - "443:443"
     depends_on:
@@ -78,7 +78,7 @@ services:
     image: wordpress
     build: ./requirements/wordpress
     container_name : wordpress
-    restart: always
+    restart: on-failure
     networks:
       - inception_network
     env_file:

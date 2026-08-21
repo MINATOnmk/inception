@@ -9,6 +9,7 @@ up :
 	
 	@mkdir -p $(VOLUMES_PATH)/mariadb_data
 	@mkdir -p $(VOLUMES_PATH)/wordpress_data
+
 	@echo "--- STEP 2: Running docker compose up and re-build"
 	@docker compose -f $(COMPOSE_FILE) up --build -d
 
@@ -25,8 +26,10 @@ clean :
 fclean : clean
 	@echo "Removing $(NAME) Docker images"
 	@docker compose -f $(COMPOSE_FILE) down --rmi all
+
 	@echo "Removing physical data folders from the host system"
 	@sudo rm -rf $(VOLUMES_PATH)
+	
 	@echo "Deep cleanup finished ✅️✅️"
 
 logs : #make logs c=nginx

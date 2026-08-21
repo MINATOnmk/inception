@@ -35,7 +35,4 @@ if [ ! -f wp-config.php ]; then
 
 fi
 
-
-echo "=> startingg php-fpm daemon"
-
 exec php-fpm8.2 -F 

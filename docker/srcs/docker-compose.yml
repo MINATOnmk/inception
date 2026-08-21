@@ -88,14 +88,12 @@ services:
 
 volumes:
   mariadb_data:
-    driver: local
     driver_opts:
       type: none
       o: bind
       device: /home/mboulagh/data/mariadb_data
 
   wordpress_data:
-    driver: local
     driver_opts:
       type: none
       o: bind

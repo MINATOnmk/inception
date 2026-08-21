@@ -4,7 +4,10 @@
 * **NGINX**: Entrypoint to the infrastructure on port 443 with TLSv1.2/1.3.
 * **WordPress**: Web application running with `php-fpm`.
 * **MariaDB**: Relational database for WordPress data.
-
+- **Redis**: Provides memory-based caching for WordPress.
+- **Adminer**: Web-based database management interface for MariaDB.
+- **cAdvisor**: Collects and displays real-time resource usage and performance metrics for running containers.
+- **Static Website**: A non-PHP showcase website (e.g., HTML/CSS/JS or Go) served independently.
 ---
 
 ## 2. Managing the Application

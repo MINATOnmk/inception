@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
     mysqld --user=mysql --bootstrap << EOF
         FLUSH PRIVILEGES; 
         CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};

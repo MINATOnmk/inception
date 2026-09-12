@@ -12,7 +12,7 @@ if [ ! -f wp-config.php ]; then
         --dbname=$MYSQL_DATABASE \
         --dbuser=$MYSQL_USER \
         --dbpass=$MYSQL_USER_PASSWORD \
-        --dbhost=mariadb
+        --dbhost=mariadb:3306
 
     wp core install --allow-root \
         --url=$DOMAIN_NAME \

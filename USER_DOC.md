@@ -1,7 +1,7 @@
 # User Documentation
 ---
 ## 1. Description of Services
-* **NGINX**: Entrypoint to the infrastructure on port 443 with TLSv1.2/1.3.
+* **NGINX**: Entrypoint to the infrastructure on port 443 with TLSv1.2.
 * **WordPress**: Web application running with `php-fpm`.
 * **MariaDB**: Relational database for WordPress data.
 - **Redis**: Provides memory-based caching for WordPress.
